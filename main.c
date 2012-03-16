@@ -13,6 +13,8 @@ int WIDTH=640, HEIGHT=480;
 int All_ticks = 0;
 int PLAYING = 0;
 
+SDL_Surface *fb_screen = NULL;
+
 struct FireBall
 {
     Sint16 xloc, yloc;
@@ -164,9 +166,11 @@ int player_update(struct Player *player, SDL_Surface *screen)
         Uint32 where = fireball_get_pos(&(fireballs[i]), All_ticks);
         Sint32 x = where>>16;
         Sint32 y = where&0xFFFF;
-        boxRGBA(screen, x-5, y-5,
+/*        boxRGBA(screen, x-5, y-5,
                         x+5, y+5,
-                        255, 50, 0, 255);
+                        255, 50, 0, 255);*/
+        SDL_Rect rect = {x-5, y-5, 10, 10};
+        SDL_BlitSurface(fb_screen, NULL, screen, &rect);
     }
     SDL_UpdateRect(screen, 0, 0, 0, 0);
     ++ All_ticks;
@@ -227,6 +231,7 @@ int main()
     }
     game_over_screen = SDL_LoadBMP("imgs/game_over.bmp");
     win_screen = SDL_LoadBMP("imgs/win.bmp");
+    fb_screen = SDL_LoadBMP("imgs/fireball.bmp");
 
     for (i = 0; i < NUM_FBs; ++ i)
     {
