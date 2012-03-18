@@ -14,3 +14,8 @@ Since the images I have at the moment are rubbishy hand-drawn ones (and are quit
 6. Add a 'win.bmp' and a 'game_over.bmp' (both should be the same dimensions as the screen).
 
 That's it!
+
+###Compiling
+
+Use:<pre>gcc -L/usr/lib -lSDL -lSDL_gfx main.c</pre>
+
